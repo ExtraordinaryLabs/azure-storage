@@ -11,7 +11,7 @@ app.use(bodyParser.json({limit: "30mb", entended: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", entended: true}))
 app.use(cors())
 
-const PORT = process.env.PORT
+const {PORT} = process.env
 
 app.get('/', controller.upload)
 
