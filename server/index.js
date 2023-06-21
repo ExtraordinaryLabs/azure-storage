@@ -2,6 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import multer from 'multer'
 import controller from './controller/index.js'
 
 const app = express()
@@ -13,6 +14,8 @@ app.use(cors())
 
 const {PORT} = process.env
 
-app.get('/container', controller.upload)
+const upload = multer({dest: 'uploads/'})
+
+app.post('/upload', upload.single('file'), controller.upload)
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
