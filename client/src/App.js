@@ -1,7 +1,9 @@
+import FileUpload from "./Uploader";
+
 function App() {
   return (
     <div>
-      Hello
+      <FileUpload />
     </div>
   );
 }
