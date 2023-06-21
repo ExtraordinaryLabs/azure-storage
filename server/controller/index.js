@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import fs from 'fs'
-import { BlobServiceClient, StorageSharedKeyCredential, newPipeline } from '@azure/storage-blob'
+import { BlobServiceClient } from '@azure/storage-blob'
 
 dotenv.config()
 
@@ -17,11 +17,9 @@ const upload = async (req, res) => {
     const blobName = req.file.originalname
     const blobClient = containerClient.getBlockBlobClient(blobName)
 
-    const fileStream = fs.createReadStream(req.file.path)
-    const fileSize = fs.statSync(req.file.path).size
+    const fileContent = fs.readFileSync(req.file.path);
 
-    const uploadOptions = { bufferSize: 4 * 1024 * 1024, maxBuffers: 20 }
-    await blobClient.uploadStream(fileStream, uploadOptions)
+    await blobClient.uploadData(fileContent);
 
     fs.unlinkSync(req.file.path)
 
