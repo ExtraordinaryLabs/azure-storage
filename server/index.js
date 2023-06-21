@@ -16,6 +16,3 @@ const {PORT} = process.env
 app.get('/', controller.upload)
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
-
-
-    // WWZBkyzklGRxeYyv
